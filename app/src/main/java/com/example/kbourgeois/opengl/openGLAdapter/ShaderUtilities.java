@@ -1,4 +1,4 @@
-package com.example.kbourgeois.opengl;
+package com.example.kbourgeois.opengl.openGLAdapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;

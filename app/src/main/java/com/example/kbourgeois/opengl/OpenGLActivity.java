@@ -8,20 +8,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import com.example.kbourgeois.opengl.openGLAdapter.ShaderUtilities;
 
 public class OpenGLActivity extends Activity {
-    private GLSurfaceView mGLView;
+    private GLSurfaceView glSurfaceView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ModelLoader.readOBJFile(this, "spaceship.obj");
         ShaderUtilities.init(this);
         if (!isTaskRoot()) {
-            // Android launched another instance of the root activity into an existing task
-            //  so just quietly finish and go away, dropping the user back into the activity
-            //  at the top of the stack (ie: the last state of this task)
             finish();
             return;
         }
@@ -32,8 +29,8 @@ public class OpenGLActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        mGLView = new MyGLSurfaceView(this);
-        setContentView(mGLView);
+        glSurfaceView = new OpenGLSurfaceView(this);
+        setContentView(glSurfaceView);
 
     }
 
