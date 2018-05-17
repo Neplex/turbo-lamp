@@ -35,13 +35,16 @@ public class Game implements Controller {
 
     public void start() {
         /// CREATE OBJECTS ///
-        ship = newObject("cube.obj", R.drawable.no_texture);
+        ship = newObject("spaceship.obj", R.drawable.skybox1);
+        ship.getTransform().setScale(.025f, .025f, .025f);
 
-        skybox = newObject("cube.obj", R.drawable.brick);
+        scene.addObject(ship);
+
+        skybox = newObject("cube.obj", R.drawable.front);
         skybox.getTransform().setScale(10, 10, 10);
 
         /// ADD OBJECTS ///
-        scene.addObject(ship);
+
         scene.addObject(skybox);
     }
 

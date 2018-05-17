@@ -19,6 +19,8 @@ public class Object3D implements Drawable {
     private static final int COORDS_PER_NORMAL = 3;
     private static final int COORDS_PER_TEX = 2;
 
+    private int[] textureID = new int[1];
+
     private final int VERTEX_STRIDE = COORDS_PER_VERTEX * 4;
     private final int TEX_STRIDE = COORDS_PER_TEX * 4;
     private final int NORMAL_STRIDE = COORDS_PER_NORMAL * 4;
@@ -115,6 +117,7 @@ public class Object3D implements Drawable {
         GLES20.glEnableVertexAttribArray(normalID);
         GLES20.glVertexAttribPointer(normalID, 2, GLES20.GL_FLOAT, false, NORMAL_STRIDE, normalBuffer);
 
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,textureID[0]);
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, indices.length, GLES20.GL_UNSIGNED_INT, indexBuffer);
 
         GLES20.glDisableVertexAttribArray(vertexID);
@@ -149,7 +152,7 @@ public class Object3D implements Drawable {
         normalID = GLES20.glGetAttribLocation(program, normalLoc);
         texID = GLES20.glGetAttribLocation(program, texLoc);
 
-        int[] textureID = {1};
+
         GLES20.glGenTextures(1, textureID, 0);
 
         GLES20.glActiveTexture(GLES20.GL_TEXTURE);

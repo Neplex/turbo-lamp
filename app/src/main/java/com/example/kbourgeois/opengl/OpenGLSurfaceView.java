@@ -12,7 +12,7 @@ class OpenGLSurfaceView extends GLSurfaceView {
     private final GameRenderer gameRenderer;
     private final Game game;
 
-    private final float TOUCH_SCALE_FACTOR = 0.0005f;
+    private final float TOUCH_SCALE_FACTOR = 0.0005f / 0.025f;
     private float mPreviousX;
     private float mPreviousY;
 
