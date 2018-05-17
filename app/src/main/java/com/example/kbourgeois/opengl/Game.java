@@ -1,20 +1,22 @@
 package com.example.kbourgeois.opengl;
 
 import android.content.Context;
-import com.example.kbourgeois.opengl.openGLAdapter.Camera;
+import com.example.kbourgeois.opengl.openGLAdapter.Controller;
 import com.example.kbourgeois.opengl.openGLAdapter.Object3D;
+import com.example.kbourgeois.opengl.openGLAdapter.Scene;
 
-public class Game {
+public class Game implements Controller {
 
     private Context context;
-    private Camera scene;
+    private Scene scene;
 
     // Objects
     private Object3D ship;
     private Object3D skybox;
 
-    Game(Context context) {
+    Game(Context context, Scene scene) {
         this.context = context;
+        this.scene = scene;
     }
 
     void moveShip(float x, float y, float z) {
@@ -23,7 +25,7 @@ public class Game {
 
     private Object3D newObject(String file, int texture) {
         Object3D obj = new Object3D();
-        obj.loadFromFile(context, "cube.obj");
+        obj.loadFromFile(context, file);
         obj.setShaders("vertexshader.vert", "fragmentshader.frag", "vPosition", "vNormal", "vTexCoord", texture);
 
         return obj;
@@ -31,9 +33,7 @@ public class Game {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void init(Camera camera) {
-        this.scene = camera;
-
+    public void start() {
         /// CREATE OBJECTS ///
         ship = newObject("cube.obj", R.drawable.no_texture);
 
@@ -45,7 +45,7 @@ public class Game {
         scene.addObject(skybox);
     }
 
-    public void loop(long delta_time) {
+    public void update(long delta_time) {
         /// LOOP ///
     }
 }

@@ -18,11 +18,14 @@ public class Object3D implements Drawable {
     private static final int COORDS_PER_VERTEX = 3;
     private static final int COORDS_PER_NORMAL = 3;
     private static final int COORDS_PER_TEX = 2;
+
     private final int VERTEX_STRIDE = COORDS_PER_VERTEX * 4;
     private final int TEX_STRIDE = COORDS_PER_TEX * 4;
     private final int NORMAL_STRIDE = COORDS_PER_NORMAL * 4;
+
     private Transform transform;
     private List<Object3D> children;
+
     private int program;
     private int vertexShaderID;
     private int fragShaderID;
@@ -149,7 +152,7 @@ public class Object3D implements Drawable {
         int[] textureID = {1};
         GLES20.glGenTextures(1, textureID, 0);
 
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE);
         ShaderUtilities.loadTexture(texture, textureID, 0);
 
         viewMatrixID = GLES20.glGetUniformLocation(program, "view");
@@ -254,6 +257,7 @@ public class Object3D implements Drawable {
             indexBuffer.position(0);
 
         } catch (IOException e) {
+            // Do nothing
         }
     }
 }

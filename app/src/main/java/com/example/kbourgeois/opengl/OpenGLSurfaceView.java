@@ -1,13 +1,17 @@
 package com.example.kbourgeois.opengl;
 
 import android.opengl.GLSurfaceView;
-import android.util.Log;
 import android.view.MotionEvent;
 import com.example.kbourgeois.opengl.openGLAdapter.Camera;
+import com.example.kbourgeois.opengl.openGLAdapter.GameRenderer;
+import com.example.kbourgeois.opengl.openGLAdapter.Scene;
 
 class OpenGLSurfaceView extends GLSurfaceView {
     private final Camera camera;
+    private final Scene scene;
+    private final GameRenderer gameRenderer;
     private final Game game;
+
     private final float TOUCH_SCALE_FACTOR = 0.0005f;
     private float mPreviousX;
     private float mPreviousY;
@@ -15,17 +19,17 @@ class OpenGLSurfaceView extends GLSurfaceView {
     OpenGLSurfaceView(OpenGLActivity mainActivity) {
         super(mainActivity);
 
-        Log.d("Debug : ", "MyGLSurfaceView");
         setEGLContextClientVersion(2);
-        Log.d("Debug : ", "Setting OpenGLES version");
-        game = new Game(mainActivity);
-        camera = new Camera(mainActivity, game);
-        Log.d("Debug : ", "Initialize renderer");
-        setRenderer(camera);
-        Log.d("Debug : ", "Set renderer");
+
+        camera = new Camera();
+        scene = new Scene();
+        game = new Game(mainActivity, scene);
+        gameRenderer = new GameRenderer(mainActivity, camera, scene, game);
+
+        setRenderer(gameRenderer);
+
         //setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
-        Log.d("Debug : ", "Set render mode");
     }
 
     public boolean onTouchEvent(MotionEvent e) {
