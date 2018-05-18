@@ -54,7 +54,6 @@ public class Camera {
     public float getNear() {
         return near;
     }
-
     public void setNear(float near) {
         this.near = near;
         this.updateMatrix();
@@ -63,7 +62,6 @@ public class Camera {
     public float getFar() {
         return far;
     }
-
     public void setFar(float far) {
         this.far = far;
         this.updateMatrix();
@@ -72,7 +70,6 @@ public class Camera {
     public float getFov() {
         return fov;
     }
-
     public void setFov(float fov) {
         this.fov = fov;
         this.updateMatrix();
@@ -81,7 +78,6 @@ public class Camera {
     public float getAspect() {
         return aspect;
     }
-
     public void setAspect(float aspect) {
         this.aspect = aspect;
         this.updateMatrix();

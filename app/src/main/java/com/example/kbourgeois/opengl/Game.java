@@ -4,6 +4,7 @@ import android.content.Context;
 import com.example.kbourgeois.opengl.openGLAdapter.Controller;
 import com.example.kbourgeois.opengl.openGLAdapter.Object3D;
 import com.example.kbourgeois.opengl.openGLAdapter.Scene;
+import com.example.kbourgeois.opengl.openGLAdapter.Vector3;
 
 public class Game implements Controller {
 
@@ -19,8 +20,8 @@ public class Game implements Controller {
         this.scene = scene;
     }
 
-    void moveShip(float x, float y, float z) {
-        ship.getTransform().translate(x, y, z);
+    void moveShip(Vector3 vec) {
+        if (ship != null) ship.getTransform().translate(vec);
     }
 
     private Object3D newObject(String file, int texture) {
@@ -35,16 +36,15 @@ public class Game implements Controller {
 
     public void start() {
         /// CREATE OBJECTS ///
-        ship = newObject("spaceship.obj", R.drawable.skybox1);
-        ship.getTransform().setScale(.025f, .025f, .025f);
+        ship = newObject("spaceship.obj", R.drawable.brick);
+        ship.getTransform().setScale(new Vector3(.03f, .03f, .03f));
+        ship.getTransform().rotateY(180);
 
-        scene.addObject(ship);
-
-        skybox = newObject("cube.obj", R.drawable.front);
-        skybox.getTransform().setScale(10, 10, 10);
+        skybox = newObject("cube.obj", R.drawable.brick);
+        skybox.getTransform().setScale(new Vector3(10, 10, 10));
 
         /// ADD OBJECTS ///
-
+        scene.addObject(ship);
         scene.addObject(skybox);
     }
 

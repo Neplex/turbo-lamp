@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 import com.example.kbourgeois.opengl.openGLAdapter.Camera;
 import com.example.kbourgeois.opengl.openGLAdapter.GameRenderer;
 import com.example.kbourgeois.opengl.openGLAdapter.Scene;
+import com.example.kbourgeois.opengl.openGLAdapter.Vector3;
 
 class OpenGLSurfaceView extends GLSurfaceView {
     private final Camera camera;
@@ -12,7 +13,7 @@ class OpenGLSurfaceView extends GLSurfaceView {
     private final GameRenderer gameRenderer;
     private final Game game;
 
-    private final float TOUCH_SCALE_FACTOR = 0.0005f / 0.025f;
+    private final float TOUCH_SCALE_FACTOR = 0.001f;
     private float mPreviousX;
     private float mPreviousY;
 
@@ -42,7 +43,11 @@ class OpenGLSurfaceView extends GLSurfaceView {
                 float dx = x - mPreviousX;
                 float dy = y - mPreviousY;
 
-                game.moveShip(dx * TOUCH_SCALE_FACTOR, -dy * TOUCH_SCALE_FACTOR, 0);
+                game.moveShip(new Vector3(
+                        dx * TOUCH_SCALE_FACTOR,
+                        -dy * TOUCH_SCALE_FACTOR,
+                        0
+                ));
 
                 requestRender();
         }

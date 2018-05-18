@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-public class Object3D implements Drawable {
+public class Object3D extends Transformable implements Drawable {
 
     private static final int COORDS_PER_VERTEX = 3;
     private static final int COORDS_PER_NORMAL = 3;
@@ -25,7 +25,6 @@ public class Object3D implements Drawable {
     private final int TEX_STRIDE = COORDS_PER_TEX * 4;
     private final int NORMAL_STRIDE = COORDS_PER_NORMAL * 4;
 
-    private Transform transform;
     private List<Object3D> children;
 
     private int program;
@@ -49,7 +48,6 @@ public class Object3D implements Drawable {
     private FloatBuffer normalBuffer;
 
     public Object3D() {
-        transform = new Transform();
         children = new ArrayList<>();
     }
 
@@ -71,21 +69,9 @@ public class Object3D implements Drawable {
         children.remove(child);
     }
 
-    /**
-     * Get object transform
-     *
-     * @return
-     */
-    public Transform getTransform() {
-        return transform;
-    }
-
     @Override
     public String toString() {
-        return "Object3D{" +
-                "transform=" + transform.toString() +
-                ", children=" + children.toString() +
-                '}';
+        return "Object3D";
     }
 
     /**
@@ -100,7 +86,7 @@ public class Object3D implements Drawable {
         // Get new transform
         Transform tf = new Transform();
         tf.applyTransform(parentTransform);
-        tf.applyTransform(this.transform);
+        tf.applyTransform(this.getTransform());
 
         // Apply the projection and view transformation.
         GLES20.glUniformMatrix4fv(viewMatrixID, 1, false, camera.getView(), 0);

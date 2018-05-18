@@ -4,40 +4,101 @@ import android.opengl.Matrix;
 
 public class Transform {
 
-    private final float[] modelMatrix;
+    private Vector3 position;
+    private Vector3 rotation;
+    private Vector3 scale;
 
     Transform() {
-        modelMatrix = new float[16];
-        Matrix.setIdentityM(modelMatrix, 0);
+        this.position = new Vector3();
+        this.rotation = new Vector3();
+        this.scale = new Vector3();
     }
 
     float[] getModelMatrix() {
+        float[] modelMatrix = new float[16];
+        Matrix.setIdentityM(modelMatrix, 0);
+
+        Matrix.translateM(modelMatrix, 0, position.x, position.y, position.z);
+        Matrix.rotateM(modelMatrix, 0, rotation.x, 1, 0, 0);
+        Matrix.rotateM(modelMatrix, 0, rotation.y, 1, 0, 0);
+        Matrix.rotateM(modelMatrix, 0, rotation.z, 1, 0, 0);
+        Matrix.scaleM(modelMatrix, 0, scale.x, scale.y, scale.z);
+
         return modelMatrix;
     }
 
     void applyTransform(Transform transform) {
-        float[] newModel = new float[modelMatrix.length];
-        Matrix.multiplyMM(newModel, 0, modelMatrix, 0, transform.getModelMatrix(), 0);
-        System.arraycopy(newModel, 0, modelMatrix, 0, modelMatrix.length);
+        this.position = this.position.add(transform.getPosition());
+        this.rotation = this.rotation.add(transform.getRotation());
+        this.scale = this.scale.add(transform.getScale());
     }
 
-    public void translate(float dx, float dy, float dz) {
-        Matrix.translateM(modelMatrix, 0, dx, dy, dz);
+    public void translate(Vector3 translate) {
+        this.position = this.position.add(translate);
     }
 
+    public void translateX(float x) {
+        this.position.x += x;
+    }
+
+    public void translateY(float y) {
+        this.position.y += y;
+    }
+
+    public void translateZ(float z) {
+        this.position.z += z;
+    }
+
+    public void rotate(Vector3 rotation) {
+        this.rotation = this.rotation.add(rotation);
+    }
     public void rotateX(float angle) {
-        Matrix.rotateM(modelMatrix, 0, angle, 1, 0, 0);
+        this.rotation.x += angle;
     }
-
     public void rotateY(float angle) {
-        Matrix.rotateM(modelMatrix, 0, angle, 0, 1, 0);
+        this.rotation.y += angle;
     }
-
     public void rotateZ(float angle) {
-        Matrix.rotateM(modelMatrix, 0, angle, 0, 0, 1);
+        this.rotation.z += angle;
     }
 
-    public void setScale(float x, float y, float z) {
-        Matrix.scaleM(modelMatrix, 0, x, y, z);
+    public void scale(Vector3 scale) {
+        this.scale = this.scale.add(scale);
+    }
+
+    public void scaleX(float x) {
+        this.scale.x += x;
+    }
+
+    public void scaleY(float y) {
+        this.scale.y += y;
+    }
+
+    public void scaleZ(float z) {
+        this.scale.z += z;
+    }
+
+    public Vector3 getPosition() {
+        return position;
+    }
+
+    public void setPosition(Vector3 position) {
+        this.position = position;
+    }
+
+    public Vector3 getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(Vector3 rotation) {
+        this.rotation = rotation;
+    }
+
+    public Vector3 getScale() {
+        return scale;
+    }
+
+    public void setScale(Vector3 scale) {
+        this.scale = scale;
     }
 }
