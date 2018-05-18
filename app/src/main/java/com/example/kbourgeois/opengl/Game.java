@@ -36,8 +36,8 @@ public class Game implements Controller {
 
     public void start() {
         /// CREATE OBJECTS ///
-        ship = newObject("spaceship.obj", R.drawable.brick);
-        ship.getTransform().setScale(new Vector3(.03f, .03f, .03f));
+        ship = newObject("SpaceCraft.obj", R.drawable.spacecraft);
+        ship.getTransform().setScale(new Vector3(.5f, .5f, .5f));
         ship.getTransform().rotateY(180);
 
         skybox = newObject("cube.obj", R.drawable.brick);
