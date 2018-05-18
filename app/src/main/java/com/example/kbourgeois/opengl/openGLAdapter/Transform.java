@@ -20,8 +20,8 @@ public class Transform {
 
         Matrix.translateM(modelMatrix, 0, position.x, position.y, position.z);
         Matrix.rotateM(modelMatrix, 0, rotation.x, 1, 0, 0);
-        Matrix.rotateM(modelMatrix, 0, rotation.y, 1, 0, 0);
-        Matrix.rotateM(modelMatrix, 0, rotation.z, 1, 0, 0);
+        Matrix.rotateM(modelMatrix, 0, rotation.y, 0, 1, 0);
+        Matrix.rotateM(modelMatrix, 0, rotation.z, 0, 0, 1);
         Matrix.scaleM(modelMatrix, 0, scale.x, scale.y, scale.z);
 
         return modelMatrix;
@@ -36,15 +36,12 @@ public class Transform {
     public void translate(Vector3 translate) {
         this.position = this.position.add(translate);
     }
-
     public void translateX(float x) {
         this.position.x += x;
     }
-
     public void translateY(float y) {
         this.position.y += y;
     }
-
     public void translateZ(float z) {
         this.position.z += z;
     }
@@ -65,23 +62,19 @@ public class Transform {
     public void scale(Vector3 scale) {
         this.scale = this.scale.add(scale);
     }
-
     public void scaleX(float x) {
-        this.scale.x += x;
+        this.scale.x = x;
     }
-
     public void scaleY(float y) {
-        this.scale.y += y;
+        this.scale.y = y;
     }
-
     public void scaleZ(float z) {
-        this.scale.z += z;
+        this.scale.z = z;
     }
 
     public Vector3 getPosition() {
         return position;
     }
-
     public void setPosition(Vector3 position) {
         this.position = position;
     }
@@ -89,7 +82,6 @@ public class Transform {
     public Vector3 getRotation() {
         return rotation;
     }
-
     public void setRotation(Vector3 rotation) {
         this.rotation = rotation;
     }
@@ -97,7 +89,6 @@ public class Transform {
     public Vector3 getScale() {
         return scale;
     }
-
     public void setScale(Vector3 scale) {
         this.scale = scale;
     }

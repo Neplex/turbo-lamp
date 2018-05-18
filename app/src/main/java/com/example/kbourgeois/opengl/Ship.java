@@ -9,9 +9,9 @@ public class Ship extends Object3D {
 
     public Ship(Context context) {
         super();
-        this.loadFromFile(context, "spaceship.obj");
-        this.setShaders("vertexshader.vert", "fragmentshader.frag", "vPosition", "vNormal", "vTexCoord", R.drawable.no_texture);
-        this.getTransform().setScale(new Vector3(.03f, .03f, .03f));
+        this.loadFromFile(context, "SpaceCraft.obj");
+        this.setShaders("vertexshader.vert", "fragmentshader.frag", "vPosition", "vNormal", "vTexCoord", R.drawable.spacecraft);
+        this.getTransform().setScale(new Vector3(.5f, .5f, .5f));
         this.getTransform().rotateY(180);
     }
 

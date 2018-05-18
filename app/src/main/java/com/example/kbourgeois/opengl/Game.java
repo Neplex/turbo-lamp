@@ -28,6 +28,7 @@ public class Game implements Controller {
 
     public void start() {
         /// CREATE OBJECTS ///
+
         ship = new Ship(context);
 
         skybox = new Skybox(context);
@@ -39,5 +40,6 @@ public class Game implements Controller {
 
     public void update(long delta_time) {
         /// LOOP ///
+        
     }
 }
