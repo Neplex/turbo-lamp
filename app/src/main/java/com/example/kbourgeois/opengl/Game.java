@@ -24,24 +24,13 @@ public class Game implements Controller {
         if (ship != null) ship.getTransform().translate(vec);
     }
 
-    private Object3D newObject(String file, int texture) {
-        Object3D obj = new Object3D();
-        obj.loadFromFile(context, file);
-        obj.setShaders("vertexshader.vert", "fragmentshader.frag", "vPosition", "vNormal", "vTexCoord", texture);
-
-        return obj;
-    }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void start() {
         /// CREATE OBJECTS ///
-        ship = newObject("spaceship.obj", R.drawable.brick);
-        ship.getTransform().setScale(new Vector3(.03f, .03f, .03f));
-        ship.getTransform().rotateY(180);
+        ship = new Ship(context);
 
-        skybox = newObject("cube.obj", R.drawable.brick);
-        skybox.getTransform().setScale(new Vector3(10, 10, 10));
+        skybox = new Skybox(context);
 
         /// ADD OBJECTS ///
         scene.addObject(ship);
