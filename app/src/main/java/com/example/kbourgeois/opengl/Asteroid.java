@@ -9,6 +9,8 @@ import java.util.Random;
 
 public class Asteroid extends Object3D {
 
+    private Vector3 rotation;
+
     public Asteroid(Context context) {
         super();
         this.loadFromFile(context, "rock_c_01.obj");
@@ -19,6 +21,11 @@ public class Asteroid extends Object3D {
                 -100 - rand.nextInt(100));
         this.getTransform().translate(v);
         this.getTransform().setScale(new Vector3(0.4f, 0.4f, 0.4f));
+        rotation = new Vector3(
+                rand.nextFloat(),
+                rand.nextFloat(),
+                rand.nextFloat()
+        );
     }
 
     public void update(long delta_time){
@@ -30,5 +37,6 @@ public class Asteroid extends Object3D {
                     -100 - rand.nextInt(100));
             this.getTransform().setPosition(v);
         }
+        this.getTransform().rotate(rotation);
     }
 }
