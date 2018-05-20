@@ -34,7 +34,7 @@ public class GameRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         GLES20.glViewport(0, 0, width, height);
-        camera.setAspect((float) width / (float) height);
+        camera.setSize(width, height);
     }
 
     @Override

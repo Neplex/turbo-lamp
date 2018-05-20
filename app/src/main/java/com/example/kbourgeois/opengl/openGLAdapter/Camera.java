@@ -12,6 +12,9 @@ public class Camera {
     private float aspect;
     private float[] bg_color = {0, 0, 1};
 
+    private float width;
+    private float height;
+
     // OpenGL MVP
     private float[] view;
     private float[] projection;
@@ -27,7 +30,7 @@ public class Camera {
         this.near = near;
         this.far = far;
         this.fov = fov;
-        this.aspect = 9.0f / 16.0f;
+        this.setSize(1920, 1080);
     }
 
     float[] getView() {
@@ -47,7 +50,7 @@ public class Camera {
     }
 
     private void updateMatrix() {
-        Matrix.setLookAtM(view, 0, 0, 1, 2, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+        Matrix.setLookAtM(view, 0, 0, 0, 2, 0f, 0f, 0f, 0f, 1f, 0f);
         Matrix.perspectiveM(projection, 0, fov, aspect, near, far);
     }
 
@@ -78,9 +81,17 @@ public class Camera {
     public float getAspect() {
         return aspect;
     }
-    public void setAspect(float aspect) {
-        this.aspect = aspect;
+    void setSize(int w, int h) {
+        this.width = w;
+        this.height = h;
+        this.aspect = this.width / this.height;
         this.updateMatrix();
     }
 
+    public float getWidth() {
+        return width;
+    }
+    public float getHeight() {
+        return height;
+    }
 }
